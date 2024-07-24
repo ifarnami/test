@@ -7,7 +7,9 @@ import Product from "./Products/Product";
 
 const Home = () => {
   const { keyword } = useParams();
-  const { data, isLoading, isError } = useGetProductsQuery({ keyword });
+  const { data, isLoading, isError, error } = useGetProductsQuery({ keyword });
+
+  console.log(error);
 
   return (
     <>
@@ -15,9 +17,7 @@ const Home = () => {
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        <Message variant="danger">
-          {isError?.data.message || isError.error}
-        </Message>
+        <Message variant="danger">{error.error}</Message>
       ) : (
         <>
           <div className="flex justify-between items-center">
